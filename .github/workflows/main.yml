@@ -24,3 +24,9 @@ jobs:
             - name: Login to Amazon ECR
               id: login-ecr
               uses: aws-actions/amazon-ecr-login@v2
+
+            - name: Build and push image to AWS ECT
+              id: build-push-image
+              run: |
+                docker build -t 744962631583.dkr.ecr.us-east-2.amazonaws.com/rocketseat/widget-server:v3 .
+                docker push 744962631583.dkr.ecr.us-east-2.amazonaws.com/rocketseat/widget-server:v3
