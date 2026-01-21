@@ -1,7 +1,9 @@
+# Base
 FROM node:25.2.1 AS base
 
 RUN npm i -g pnpm
 
+# Dependencias
 FROM base AS dependencies
 
 WORKDIR /usr/src/app
@@ -10,6 +12,7 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
+# Build
 FROM base AS build
 
 WORKDIR /usr/src/app
@@ -20,6 +23,7 @@ COPY --from=dependencies /usr/src/app/node_modules ./node_modules
 RUN pnpm build
 RUN pnpm prune --prod
 
+# Deploy
 FROM cgr.dev/chainguard/node AS deploy
 
 USER 1000

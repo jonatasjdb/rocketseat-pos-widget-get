@@ -4,8 +4,6 @@ on:
     push:
         branches:
             - 'main'
-env:
-  CONTAINER_REPOSITORY: 'rocketseat/widget-server'
 jobs:
     Build:
         name: Build
