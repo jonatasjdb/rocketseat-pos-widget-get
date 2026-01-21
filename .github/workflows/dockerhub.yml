@@ -26,11 +26,11 @@ jobs:
                 SHA=$(echo $GITHUB_SHA | head -c7)
                 echo "sha=$SHA" >> $GITHUB_OUTPUT
 
-            - name: Build and push image to AWS ECT
+            - name: Build and push image to DOCKER HUB
               id: build-push-image
               env:
-                DOCKER_HUB_REPOSITORY: ${{ vars.ECR_REPOSITORY}}
+                DOCKERHUB_REPOSITORY: ${{ vars.DOCKERHUB_REPOSITORY}}
                 IMAGE_TAG: ${{steps.generate_tag.outputs.sha}}
               run: |
-                docker build -t $DOCKER_HUB_REPOSITORY:$IMAGE_TAG .
-                docker push $DOCKER_HUB_REPOSITORY:$IMAGE_TAG
+                docker build -t $DOCKERHUB_REPOSITORY:$IMAGE_TAG .
+                docker push $DOCKERHUB_REPOSITORY:$IMAGE_TAG
